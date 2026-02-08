@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Prestige Face Nigeria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #ffda79;
+      --dark-blue: #1e1e2f;
+      --darker-blue: #111119;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: radial-gradient(circle at center, var(--dark-blue) 0%, var(--darker-blue) 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    /* Animated Background Orbs */
+    .orb {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: float 15s infinite ease-in-out;
+      z-index: -1;
+    }
+
+    .orb-blue { 
+      background: #4e54c8; 
+      top: 10%; 
+      left: 10%; 
+    }
+    
+    .orb-gold { 
+      background: var(--gold); 
+      bottom: 10%; 
+      right: 10%; 
+      animation-delay: -7.5s; 
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 40px) scale(0.9); }
+    }
+
+    /* Main Container */
+    .auth-container {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 600px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    /* Left Side - Branding */
+    .branding-side {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .branding-side::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--gold) 0%, transparent 70%);
+      opacity: 0.15;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      z-index: 1;
+      position: relative;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .branding-side h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .branding-side p {
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 30px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .features {
+      list-style: none;
+      z-index: 1;
+      position: relative;
+      padding: 0;
+    }
+
+    .features li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .features i {
+      color: var(--gold);
+      margin-right: 15px;
+      font-size: 1.1rem;
+    }
+
+    /* Right Side - Login Form */
+    .signup-side {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .signup-card {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { 
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; 
+      margin-bottom: 10px; 
+      color: var(--gold); 
+    }
+    
+    .signup-side p { 
+      color: rgba(255,255,255,0.7); 
+      margin-bottom: 30px; 
+      font-size: 0.95rem; 
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.5);
+      z-index: 1;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 15px 16px 50px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 15px rgba(255, 218, 121, 0.3);
+    }
+
+    .btn-signup {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--darker-blue);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-signup:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 218, 121, 0.4);
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      font-size: 0.85rem;
+    }
+    
+    .options a { 
+      color: var(--gold); 
+      text-decoration: none; 
+      opacity: 0.8; 
+      transition: opacity 0.3s;
+    }
+    
+    .options a:hover { 
+      opacity: 1; 
+      text-decoration: underline; 
+    }
+
+    footer { 
+      margin-top: 40px; 
+      font-size: 0.75rem; 
+      color: rgba(255,255,255,0.4); 
+      letter-spacing: 1px; 
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .auth-container {
+        flex-direction: column;
+        min-height: auto;
+        max-width: 500px;
+      }
+      
+      .branding-side {
+        padding: 40px 30px;
+        text-align: center;
+      }
+      
+      .logo {
+        font-size: 2.5rem;
+      }
+      
+      .branding-side h2 {
+        font-size: 1.8rem;
+      }
+      
+      .signup-side {
+        padding: 40px 30px;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .orb {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="auth-container">
+    <!-- Left Side - Branding -->
+    <div class="branding-side">
+        <div class="logo">P<span>F</span>N</div>
+        <h2>Start Your Modeling Journey</h2>
+        <p>Join Nigeria's most prestigious modeling competition. Create your account to apply, showcase your portfolio, and connect with top agencies.</p>
+        
+        <ul class="features">
+            <li><i class="fas fa-check-circle"></i> Apply for Prestige Face Nigeria 2026</li>
+            <li><i class="fas fa-check-circle"></i> Create & manage your digital portfolio</li>
+            <li><i class="fas fa-check-circle"></i> Get discovered by top agencies</li>
+            <li><i class="fas fa-check-circle"></i> Receive personalized feedback</li>
+            <li><i class="fas fa-check-circle"></i> Access exclusive model resources</li>
+        </ul>
+    </div>
+
+    <div class="signup-side">
+  <div class="signup-card">
+    <h1>Create Account</h1>
+    <p>Fill in your details to join Prestige Face Nigeria</p>
+
+    <form onsubmit="handleSignup(event)">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="signup-email" placeholder="Email Address" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="signup-password" placeholder="Create Password" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-shield-alt"></i>
+        <input type="password" placeholder="Confirm Password" required>
+      </div>
+
+      <button type="submit" class="btn-signup">Get Started</button>
+    </form>
+
+    <p class="terms">By signing up, you agree to our Terms of Service.</p>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  console.log("Script is attempting to initialize...");
+
+  const SUPABASE_URL = 'https://gykkocmrjfjocmwjwfst.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_WSvJdtO4jRhbXw4PZexD0w_gBEiCkFT';
+  
+  // RENAME THIS to supabaseClient to avoid the "already declared" error
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  console.log("Supabase Client initialized successfully!");
+
+  async function handleSignup(e) {
+    e.preventDefault();
+    console.log("Signup button clicked!");
+    
+    const btn = e.target.querySelector('button');
+    const originalText = btn.innerText;
+    btn.innerText = "Processing..."; 
+    btn.disabled = true;
+
+    try {
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      console.log("Attempting to sign up:", email);
+
+      // Use the new variable name here too
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password
+      });
+
+      if (error) throw error;
+
+      console.log("Signup success data:", data);
+      alert("Success! Account created.");
+      window.location.href = "login.html";
+
+    } catch (err) {
+      console.error("Caught error:", err.message);
+      alert("Signup Error: " + err.message);
+    } finally {
+      btn.innerText = originalText;
+      btn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>
